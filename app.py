@@ -10,10 +10,13 @@ HISTORY_FILE = "tip_history.json"
 
 # Load existing staff tip rates if available
 def load_staff_tip_rates():
-    if os.path.exists(TIP_RATES_FILE):
+    if not os.path.exists(TIP_RATES_FILE) or os.stat(TIP_RATES_FILE).st_size == 0:
+        return {}  # Return empty dict if file doesn't exist or is empty
+    try:
         with open(TIP_RATES_FILE, "r") as file:
             return json.load(file)
-    return {}
+    except json.JSONDecodeError:  # Handle invalid JSON
+        return {}
 
 # Save staff tip rates persistently
 def save_staff_tip_rates(tip_rates):
@@ -22,10 +25,13 @@ def save_staff_tip_rates(tip_rates):
 
 # Load past tip history
 def load_tip_history():
-    if os.path.exists(HISTORY_FILE):
+    if not os.path.exists(HISTORY_FILE) or os.stat(HISTORY_FILE).st_size == 0:
+        return []  # Return empty list if file doesn't exist or is empty
+    try:
         with open(HISTORY_FILE, "r") as file:
             return json.load(file)
-    return []
+    except json.JSONDecodeError:  # Handle invalid JSON
+        return []
 
 # Save tip history
 def save_tip_history(record):
