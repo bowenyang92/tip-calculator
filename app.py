@@ -41,7 +41,7 @@ def save_tip_history(record):
         json.dump(history, file)
 
 # Hardcoded staff list (to be updated in future versions)
-staff_list = ["Alice", "Bob", "Charlie", "David", "Emma", "Frank", "Grace", "Helen"]
+staff_list = ["Aggie", "Faiz", "Hang", "Jack", "Julia", "Kate", "Mia", "Rong", "Shaoyang", "Shirely"]
 
 # Load saved tip rates
 saved_tip_rates = load_staff_tip_rates()
